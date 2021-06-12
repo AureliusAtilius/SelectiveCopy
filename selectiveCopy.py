@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 # Usage
 # selectiveCopy.py <folder> <extension>
 
@@ -6,9 +6,17 @@ import os
 import sys
 
 def selectiveCopy(folder, fileExt):
-    # TODO: Walk through folder, check extension
-    for folder, subfolder, file in os.walk(os.path):
-# TODO: Move specific files to new folder
+    # Create new folder
+    ext = fileExt.replace(".","")
+    os.mkdir(folder+"\\{}_files".format(ext))
+    #  Walk through folder, check extension
+    for folder, subfolder, file in os.walk(os.path(folder)):
+        for filename in file:
+            if filename.endswith(fileExt):
+                # Move specific files to new folder
+                os.copy(os.path.abspath(filename),folder+"\\{}_files\\{}".format(fileExt,filename) )
+
+
 
 
 if __name__ == "__main__":
